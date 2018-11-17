@@ -102,6 +102,6 @@ Then open `/etc/hostname` and enter your super creative hostname.
 Then add it to /etc/hosts like so:
 ```
 127.0.0.1	  localhost
-::1           localhost
+::1               localhost
 127.0.1.1	  myhostname.localdomain	myhostname
 ```
