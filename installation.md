@@ -58,9 +58,50 @@ mount /dev/bootpartition /mnt/boot
 ```
 ### Installing the base packages
 Cool, now we have our filesystems mounted we can actually install the packages!  
-Run `pacstrap /mnt base` to install the base packages. I actually recommend you also install base-devel. It'll save you time later on.
+Run 
+```pacstrap /mnt base``` 
+to install the base packages.  
+I actually recommend you also install base-devel. It'll save you time later on.
 For my machine, I'd run `pacstrap /mnt base base-devel`.  
 On my Macbook, I also install `wireless_tools`, so I can still run `wifi-menu` once I've installed Arch.  
 The `base` packages does not contain all the packages that the live image (your install USB) has.
 Sometimes, when I try to run `pacstrap`, I get really slow speeds. You can fix this by choosing a mirror server close to you in `/etc/pacman.d/mirrorlist`.
 Run your editor of choice (nano, vim, etc) and put the mirror server closest to you at the top of the file.
+### Configuring the installed system
+#### File system table
+Generate a file system table file (fstab) by running 
+```
+genfstab -U /mnt >> /mnt/etc/fstab
+```
+#### Chroot
+Now let's change the root to the newly installed system! :)
+```
+arch-chroot /mnt
+```
+#### Timezone
+Set the timezone: (use tab completion to find your timezone)  
+```
+ln -sf /usr/share/zoneinfo/Region/City /etc/localtime
+```
+then synchronize the hardware clock to the timezone:
+```
+hwclock --systohc
+```
+#### Locale
+Uncomment the locales you need in `/etc/locale.gen` using your editor of choice, and then generate them with
+```
+locale-gen
+```
+Set the `LANG` variable in `/etc/locale.conf`, for example: 
+```
+LANG=en_US.UTF-8
+```
+#### Hostname
+Choose a fancy hostname for your machine :)  
+Then open `/etc/hostname` and enter your super creative hostname.  
+Then add it to /etc/hosts like so:
+```
+127.0.0.1	  localhost
+::1         localhost
+127.0.1.1	  myhostname.localdomain	myhostname
+```
