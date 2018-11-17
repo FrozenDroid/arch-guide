@@ -60,5 +60,7 @@ mount /dev/bootpartition /mnt/boot
 Cool, now we have our filesystems mounted we can actually install the packages!  
 Run `pacstrap /mnt base` to install the base packages. I actually recommend you also install base-devel. It'll save you time later on.
 For my machine, I'd run `pacstrap /mnt base base-devel`.  
-On my Macbook, I also install `wireless-tools`, so I can still run `wifi-menu` once I've installed Arch.  
+On my Macbook, I also install `wireless_tools`, so I can still run `wifi-menu` once I've installed Arch.  
 The `base` packages does not contain all the packages that the live image (your install USB) has.
+Sometimes, when I try to run `pacstrap`, I get really slow speeds. You can fix this by choosing a mirror server close to you in `/etc/pacman.d/mirrorlist`.
+Run your editor of choice (nano, vim, etc) and put the mirror server closest to you at the top of the file.
