@@ -115,3 +115,10 @@ initrd   /initramfs-linux.img
 options  root=/dev/rootpartition rw
 ```
 where `rootpartition` is the root partition (in my case it's `sda2`)
+#### Root password
+Now we're just about done for the base install!  
+Choose a password for root:
+```
+passwd
+```
+
